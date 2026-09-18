@@ -52,7 +52,7 @@ function main() {
       severity: "med",
       status: "warn",
       summary: "PRODUCT.md missing schema stamp",
-      fix: "add <!-- bridge:product-schema 1 -->",
+      fix: "add <!-- bridge:product-schema 1 --> (+ keel + impeccable stamps)",
       auto: true,
     });
   }

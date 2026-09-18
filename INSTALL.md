@@ -83,7 +83,7 @@ npx --yes github:raulaguila/bridge install --list-providers
 
 1. Install Keel and Impeccable for the **same** providers.
 2. Reload the harness.
-3. `/bridge init` → `/bridge contract` → `/bridge plan`.
+3. `/bridge init` → `/bridge contract` → `/bridge plan` → `/bridge build`.
 
 ## Update
 

@@ -1,6 +1,6 @@
 # Bridge
 
-FE↔BE orchestration for AI coding agents. 1 skill, 8 commands — sequences [Keel](https://github.com/raulaguila/keel) (backend) and [Impeccable](https://github.com/pbakaus/impeccable) (frontend) through a shared contract.
+FE↔BE orchestration for AI coding agents. 1 skill, 8 commands — drives [Keel](https://github.com/raulaguila/keel) (backend) and [Impeccable](https://github.com/pbakaus/impeccable) (frontend) **internally** through a shared contract.
 
 > **Quick start:** Install Keel + Impeccable + Bridge into the same project, then run `/bridge init`.  
 > `npx --yes github:raulaguila/bridge install` · Provider details: [INSTALL.md](INSTALL.md).
@@ -9,12 +9,12 @@ FE↔BE orchestration for AI coding agents. 1 skill, 8 commands — sequences [K
 
 Backend and frontend skills optimize their own craft. Without a shared contract they invent parallel fields, disagree on auth headers, and “ship” with mock policy undefined.
 
-Bridge owns **contract, sequence, and monitoring** — not pixels, not service topology:
+You talk to **Bridge only**. Bridge loads Keel/Impeccable playbooks behind `/bridge build` and `/bridge ship` — you should not need to paste `/keel` or `/impeccable` commands.
 
 - **Contract first.** `/bridge contract` negotiates `CONTRACT.md` (APIs, auth, errors, mocks) before parallel FE/BE build.
-- **Explicit sequence.** `/bridge plan` persists steps in `.bridge/plan.md`; `/bridge handoff` emits copy-paste `/keel` and `/impeccable` lines.
+- **Explicit sequence.** `/bridge plan` persists `/bridge …` steps in `.bridge/plan.md`; `/bridge build` runs the next craft step internally.
 - **Gap codes.** `/bridge sync` diffs UI ↔ contract ↔ BE with stable codes (`BE_MISSING_ROUTE`, `FE_AUTH_HEADER`, …).
-- **Combined gate.** `/bridge ship` checks release readiness against the contract without replacing `/keel ship` or `/impeccable polish`.
+- **Combined gate.** `/bridge ship` checks CONTRACT readiness and runs BE ship + FE polish playbooks internally.
 
 ## What's Included
 
@@ -30,30 +30,33 @@ Start with:
 /bridge init
 ```
 
-Then `/bridge contract` → `/bridge plan` → hand off craft → `/bridge sync` → `/bridge ship`.
+Then `/bridge contract` → `/bridge plan` → `/bridge build` → `/bridge sync` → `/bridge ship`.
 
 ### 8 Commands
 
 | Command | What it does |
 |---------|--------------|
-| `/bridge init` | Shared `PRODUCT.md` + CONTRACT stub, then both Keel and Impeccable init |
+| `/bridge init` | Shared `PRODUCT.md` + CONTRACT stub; finishes Keel + Impeccable init internally |
 | `/bridge contract` | Negotiate / accept `CONTRACT.md` (optional OpenAPI seed via CLI) |
-| `/bridge plan` | Sequence Keel / Impeccable; persist `.bridge/plan.md` |
+| `/bridge plan` | Sequence as `/bridge …` steps; persist `.bridge/plan.md` |
+| `/bridge build` | Run craft work via Keel/Impeccable playbooks (`be:shape`, `fe:polish`, …) |
 | `/bridge sync` | Diff UI ↔ contract ↔ BE with gap codes |
 | `/bridge status` | Pulse artifacts, skills, and plan (`--json`) |
 | `/bridge doctor` | Validate stamps / Status / APIs / skills (`--fix`) |
-| `/bridge ship` | Combined release gate vs CONTRACT |
-| `/bridge handoff` | Exact copy-paste `/keel` and `/impeccable` lines |
+| `/bridge ship` | Combined release gate; runs BE ship + FE polish internally |
 
-Bare `/bridge` recommends next steps — it does not auto-run Keel or Impeccable.
+**Alias:** `/bridge handoff` → `/bridge build`.
+
+Bare `/bridge` recommends **Bridge-only** next steps.
 
 #### Usage Examples
 
 ```
 /bridge contract
 /bridge plan
+/bridge build be:shape checkout
+/bridge build fe:shape checkout
 /bridge sync
-/bridge handoff
 /bridge ship
 ```
 
@@ -63,7 +66,7 @@ Bare `/bridge` recommends next steps — it does not auto-run Keel or Impeccable
 
 ## Installation
 
-Node **20+**. Install **Keel** and **Impeccable** into the same providers so handoff commands resolve.
+Node **20+**. Install **Keel** and **Impeccable** into the same providers so Bridge can load their playbooks.
 
 ### Option 1: CLI installer (Recommended)
 
@@ -104,7 +107,7 @@ node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
 /bridge init
 /bridge contract
 /bridge plan
-/bridge handoff      # paste the emitted /keel and /impeccable lines
+/bridge build          # next plan step, or e.g. be:shape / fe:polish
 /bridge sync
 /bridge ship
 ```
@@ -124,7 +127,7 @@ node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
 ```bash
 npx --yes github:raulaguila/bridge status --json
 npx --yes github:raulaguila/bridge doctor --json
-npx --yes github:raulaguila/bridge plan write --title=App --steps="/keel shape|/impeccable shape|/bridge sync"
+npx --yes github:raulaguila/bridge plan write --title=App --steps="/bridge build be:shape|/bridge build fe:shape|/bridge sync"
 npx --yes github:raulaguila/bridge seed --in=openapi.yaml
 ```
 
@@ -138,4 +141,4 @@ Apache 2.0. See [LICENSE](LICENSE).
 
 ---
 
-Orchestrates [Keel](https://github.com/raulaguila/keel) + [Impeccable](https://github.com/pbakaus/impeccable).
+Orchestrates [Keel](https://github.com/raulaguila/keel) + [Impeccable](https://github.com/pbakaus/impeccable) behind a Bridge-only command surface.

@@ -70,12 +70,12 @@ Bearer
 {
   let r = run(
     "plan.js",
-    ["write", "--title=Demo", "--steps=/keel shape|/impeccable shape|/bridge sync"],
+    ["write", "--title=Demo", "--steps=/bridge build be:shape|/bridge build fe:shape|/bridge sync"],
     tmp,
   );
   if (r.status !== 0) fail("plan write " + r.stderr);
   r = run("plan.js", ["next"], tmp);
-  if (!String(r.stdout).includes("keel shape")) fail("plan next");
+  if (!String(r.stdout).includes("bridge build be:shape")) fail("plan next");
   r = run("plan.js", ["done"], tmp);
   if (r.status !== 0) fail("plan done");
   r = run("plan.js", ["status", "--json"], tmp);

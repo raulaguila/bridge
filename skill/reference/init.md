@@ -43,7 +43,7 @@ Bridge does not replace Keel or Impeccable init. After A, you **must** complete 
 ### C. Next Bridge step
 
 Tell the user the next Bridge step is usually `/bridge contract` then `/bridge plan`.  
-If code exists: offer `/keel document` and/or `/impeccable document` as optional follow-ups (not part of init).
+If code exists and docs are stale, suggest `/bridge build be:document` and/or `/bridge build fe:document` — never `/keel document` / `/impeccable document`.
 
 ## Order
 
@@ -54,4 +54,5 @@ Prefer **Keel then Impeccable** so backend operating context lands before FE liv
 - Filling Scale & SLOs with invented numbers
 - Generating DESIGN.md or ARCHITECTURE.md here
 - Ending `/bridge init` after only Impeccable (or only Keel) craft init
-- Silently auto-running later craft commands (`shape`, `critique`, …) — init of both crafts is the exception
+- Suggesting `/keel` or `/impeccable` commands to the user
+- Silently auto-running later craft (`shape`, `critique`, …) outside `/bridge build` / `/bridge ship` — init of both crafts is required here

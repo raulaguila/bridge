@@ -18,4 +18,5 @@ Own the **FE↔BE contract**. This is Bridge’s core planning artifact.
 
 - Smallest API surface for the job-to-be-done.
 - Mocks policy required before parallel FE build.
-- Do not implement BE/UI here.
+- Do not implement BE/UI here — after accept, next is `/bridge plan` then `/bridge build …`.
+- Never suggest `/keel` or `/impeccable` as follow-ups.
