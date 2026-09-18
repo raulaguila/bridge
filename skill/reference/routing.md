@@ -4,7 +4,7 @@ Bare `/bridge` — recommend **2–3** commands, never auto-run.
 
 | Signal | Lead with |
 |--------|-----------|
-| No PRODUCT.md | `init` |
+| No PRODUCT.md | `init` (covers Keel + Impeccable init too) |
 | PRODUCT yes, no CONTRACT / draft | `contract` |
 | CONTRACT accepted, no sequence yet | `plan` |
 | Artifact/CONTRACT validation | `doctor` |

@@ -12,7 +12,7 @@ Orchestrator for **Keel** (backend) + **Impeccable** (frontend). You own **contr
 3. **Thin context** — load only `reference/<command>.md`. Never preload Keel personas + Impeccable craft-floor together.
 4. **Evidence** — invent no SLOs/QPS/fake fields. Gaps use codes from [sync.md](reference/sync.md).
 5. **User language** — reports in user’s language; command names English.
-6. **Issue-driven close** — [next-commands.md](reference/next-commands.md); never auto-run Keel/Impeccable unless asked.
+6. **Issue-driven close** — [next-commands.md](reference/next-commands.md); never auto-run Keel/Impeccable craft (`shape`, `critique`, …) unless asked. **Exception:** `/bridge init` must finish both Keel and Impeccable **init** playbooks (see [init.md](reference/init.md)).
 
 ## Setup
 
@@ -26,7 +26,7 @@ Orchestrator for **Keel** (backend) + **Impeccable** (frontend). You own **contr
 
 | Command | Does | Does not | Ref |
 |---------|------|----------|-----|
-| `init` | Shared PRODUCT + CONTRACT stub | Write DESIGN/ARCHITECTURE | [init.md](reference/init.md) |
+| `init` | Shared PRODUCT + CONTRACT stub **and** both Keel + Impeccable init | Write DESIGN/ARCHITECTURE; skip either craft init | [init.md](reference/init.md) |
 | `contract` | Negotiate CONTRACT (+ OpenAPI seed) | Implement handlers/screens | [contract.md](reference/contract.md) |
 | `plan` | Sequence + persist `.bridge/plan.md` | Copy-paste-only → `handoff`; auto-run all | [plan.md](reference/plan.md) |
 | `sync` | Diff UI↔CONTRACT↔BE with gap codes | Mega-fix both stacks | [sync.md](reference/sync.md) |

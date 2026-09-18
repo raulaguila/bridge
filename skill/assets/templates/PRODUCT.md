@@ -1,6 +1,8 @@
 # Product
 
 <!-- bridge:product-schema 1 -->
+<!-- keel:product-schema 1 -->
+<!-- impeccable:product-schema 1 -->
 <!-- Shared by Bridge, Keel, and Impeccable. User's language. -->
 
 ## Platform

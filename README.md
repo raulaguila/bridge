@@ -36,7 +36,7 @@ Then `/bridge contract` → `/bridge plan` → hand off craft → `/bridge sync`
 
 | Command | What it does |
 |---------|--------------|
-| `/bridge init` | Shared `PRODUCT.md` + CONTRACT stub |
+| `/bridge init` | Shared `PRODUCT.md` + CONTRACT stub, then both Keel and Impeccable init |
 | `/bridge contract` | Negotiate / accept `CONTRACT.md` (optional OpenAPI seed via CLI) |
 | `/bridge plan` | Sequence Keel / Impeccable; persist `.bridge/plan.md` |
 | `/bridge sync` | Diff UI ↔ contract ↔ BE with gap codes |

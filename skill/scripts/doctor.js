@@ -46,13 +46,13 @@ function main() {
       summary: "PRODUCT.md missing",
       fix: "/bridge init",
     });
-  } else if (!/bridge:product-schema|keel:product-schema/.test(product)) {
+  } else if (!/bridge:product-schema|keel:product-schema|impeccable:product-schema/.test(product)) {
     findings.push({
       id: "product-stamp",
       severity: "med",
       status: "warn",
       summary: "PRODUCT.md missing schema stamp",
-      fix: "add <!-- bridge:product-schema 1 -->",
+      fix: "add <!-- bridge:product-schema 1 --> (+ keel + impeccable stamps)",
       auto: true,
     });
   }
@@ -136,9 +136,27 @@ function main() {
   if (args.fix) {
     for (const f of findings.filter((x) => x.auto)) {
       if (f.id === "product-stamp" && product) {
-        if (!/bridge:product-schema|keel:product-schema/.test(product)) {
-          fs.writeFileSync(path.join(ROOT, "PRODUCT.md"), `<!-- bridge:product-schema 1 -->\n${product}`);
+        let next = product;
+        if (!/bridge:product-schema/.test(next)) {
+          next = `<!-- bridge:product-schema 1 -->\n${next}`;
         }
+        if (!/keel:product-schema/.test(next)) {
+          next = next.replace(
+            /<!-- bridge:product-schema 1 -->/,
+            "<!-- bridge:product-schema 1 -->\n<!-- keel:product-schema 1 -->",
+          );
+          if (!/keel:product-schema/.test(next)) next = `<!-- keel:product-schema 1 -->\n${next}`;
+        }
+        if (!/impeccable:product-schema/.test(next)) {
+          next = next.replace(
+            /<!-- keel:product-schema 1 -->/,
+            "<!-- keel:product-schema 1 -->\n<!-- impeccable:product-schema 1 -->",
+          );
+          if (!/impeccable:product-schema/.test(next)) {
+            next = `<!-- impeccable:product-schema 1 -->\n${next}`;
+          }
+        }
+        if (next !== product) fs.writeFileSync(path.join(ROOT, "PRODUCT.md"), next);
         f.status = "fixed";
       }
       if (f.id === "contract-stamp" && contract) {
