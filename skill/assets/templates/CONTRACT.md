@@ -35,6 +35,16 @@
 
 ## Pagination / idempotency
 
+## Mocks
+
+<!-- When may FE build in parallel without real BE? -->
+
+| Allowed without BE | Until | Owner |
+|--------------------|-------|-------|
+| <!-- e.g. static fixture for GET /me --> | <!-- CONTRACT accepted + stub route OR date --> | |
+
+Rules: no mock fields outside CONTRACT; stubs must match error shape.
+
 ## Non-goals
 
 ## Open questions

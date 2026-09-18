@@ -7,6 +7,7 @@ Bare `/bridge` — recommend **2–3** commands, never auto-run.
 | No PRODUCT.md | `init` |
 | PRODUCT yes, no CONTRACT / draft | `contract` |
 | CONTRACT accepted, no sequence yet | `plan` |
+| Artifact/CONTRACT validation | `doctor` |
 | FE and BE both moving | `sync` |
 | “Are we ready to launch?” | `ship` (after `sync`) |
 | User wants exact `/keel` `/impeccable` lines | `handoff` |

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+CMD="${1:-help}"
+shift || true
+case "$CMD" in
+  status) exec node "$ROOT/status.js" "$@" ;;
+  doctor) exec node "$ROOT/doctor.js" "$@" ;;
+  plan) exec node "$ROOT/plan.js" "$@" ;;
+  openapi-seed|seed) exec node "$ROOT/openapi-seed.js" "$@" ;;
+  help|-h|--help)
+    echo "bridge scripts"
+    echo "  status [--json]"
+    echo "  doctor [--json] [--fix]"
+    echo "  plan write|status|done|next …"
+    echo "  openapi-seed [--in=openapi.yaml] [--force]"
+    ;;
+  *)
+    echo "unknown: $CMD" >&2
+    exit 1
+    ;;
+esac

@@ -7,40 +7,43 @@ Orchestrator for **Keel** (backend) + **Impeccable** (frontend). You own **contr
 
 ## Laws
 
-1. **Delegate craft** — backend → `/keel …`; frontend → `/impeccable …`. Do not re-score categories or redesign UI/architecture inside Bridge.
-2. **Contract first** — no parallel FE/BE build without an accepted `CONTRACT.md` (and PRODUCT when missing).
+1. **Delegate craft** — backend → `/keel …`; frontend → `/impeccable …`. Do not re-score or redesign UI/architecture inside Bridge.
+2. **Contract first** — no parallel FE/BE build without accepted `CONTRACT.md` (+ Mocks policy).
 3. **Thin context** — load only `reference/<command>.md`. Never preload Keel personas + Impeccable craft-floor together.
-4. **Evidence** — invent no SLOs, QPS, or fake API fields. Gaps cite path or missing contract clause.
-5. **User language** — reports in the user’s language; command names stay English (`/bridge plan`, `/keel shape`).
-6. **Issue-driven close** — [next-commands.md](reference/next-commands.md): suggest next steps only for pending gaps; never auto-run Keel/Impeccable unless the user asks.
+4. **Evidence** — invent no SLOs/QPS/fake fields. Gaps use codes from [sync.md](reference/sync.md).
+5. **User language** — reports in user’s language; command names English.
+6. **Issue-driven close** — [next-commands.md](reference/next-commands.md); never auto-run Keel/Impeccable unless asked.
 
 ## Setup
 
-1. Confirm Keel and/or Impeccable skills are installed (or say what’s missing).
-2. Read `PRODUCT.md`, `CONTRACT.md`, `ARCHITECTURE.md`, `DESIGN.md` if present — do not invent sections.
+1. Prefer scripts: `node <bridge-skill>/scripts/status.js --json` (detects Keel/Impeccable).
+2. Read PRODUCT / CONTRACT / ARCHITECTURE / DESIGN if present.
 3. Route via Commands. Bare `/bridge` → [routing.md](reference/routing.md).
+
+`<bridge-skill>` = folder containing this SKILL.md.
 
 ## Commands
 
 | Command | Does | Does not | Ref |
 |---------|------|----------|-----|
-| `init` | Shared PRODUCT + empty CONTRACT stub | Write DESIGN/ARCHITECTURE alone | [init.md](reference/init.md) |
-| `contract` | Draft/negotiate FE↔BE contract | Implement handlers or screens | [contract.md](reference/contract.md) |
-| `plan` | Sequenced plan calling Keel + Impeccable | Execute all steps unasked | [plan.md](reference/plan.md) |
-| `sync` | Diff UI assumptions vs API/contract; open gaps | Fix both stacks in one mega-diff | [sync.md](reference/sync.md) |
-| `status` | Pulse: contract, Keel status, Impeccable artifacts | Full critique | [status.md](reference/status.md) |
-| `ship` | Release gate: both sides ready vs CONTRACT | Replace `/keel ship` or `/impeccable polish` | [ship.md](reference/ship.md) |
-| `handoff` | Emit exact `/keel …` and `/impeccable …` lines for the user | Run them silently | [handoff.md](reference/handoff.md) |
+| `init` | Shared PRODUCT + CONTRACT stub | Write DESIGN/ARCHITECTURE | [init.md](reference/init.md) |
+| `contract` | Negotiate CONTRACT (+ OpenAPI seed) | Implement handlers/screens | [contract.md](reference/contract.md) |
+| `plan` | Sequence + persist `.bridge/plan.md` | Copy-paste-only → `handoff`; auto-run all | [plan.md](reference/plan.md) |
+| `sync` | Diff UI↔CONTRACT↔BE with gap codes | Mega-fix both stacks | [sync.md](reference/sync.md) |
+| `status` | Pulse artifacts + plan + skills | Full critique | [status.md](reference/status.md) |
+| `doctor` | Validate CONTRACT/PRODUCT (`--fix` stamps) | App smell scan | [doctor.md](reference/doctor.md) |
+| `ship` | Combined release gate vs CONTRACT | Replace keel ship / impeccable polish | [ship.md](reference/ship.md) |
+| `handoff` | Exact `/keel` `/impeccable` lines | Run them silently; full plan narrative → `plan` | [handoff.md](reference/handoff.md) |
 
-## Delegation map
+## Scripts
 
-| Concern | Owner |
-|---------|--------|
-| APIs, data, failure, migrations, backend score | `/keel shape` · `critique` · `harden` · `ship` · … |
-| UX/UI, visual system, frontend score | `/impeccable shape` · `critique` · `polish` · … |
-| Shared PRODUCT facts, CONTRACT, order of work, gap list | **Bridge** |
+```bash
+node <bridge-skill>/scripts/status.js [--json]
+node <bridge-skill>/scripts/doctor.js [--json] [--fix]
+node <bridge-skill>/scripts/plan.js write|status|done|next …
+node <bridge-skill>/scripts/openapi-seed.js [--in=openapi.yaml] [--force]
+```
 
 ## Close
 
-Pending gaps → [next-commands.md](reference/next-commands.md) (2–3 max).  
-None → `No pending issues — no next commands.`
+Pending gaps → [next-commands.md](reference/next-commands.md) (2–3). Else nothing.
