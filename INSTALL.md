@@ -1,12 +1,14 @@
-# Instalar Bridge em diversos agentes / modelos
+# Install Bridge on many agents / models
 
-Bridge orquestra **Keel** + **Impeccable**. Instale os três no mesmo projeto.  
-Rode **no diretório do seu projeto** — sem clonar o Bridge.
+Bridge orchestrates **Keel** + **Impeccable**. Install all three into the same project.  
+Run from **your project root** — no Bridge clone required.
 
-## Instalação direta (recomendado)
+> Prefer the [README](README.md) quick start. This page is the full provider table.
+
+## Direct install (recommended)
 
 ```bash
-cd /caminho/do/seu/projeto
+cd /path/to/your/project
 
 curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor
 
@@ -18,56 +20,57 @@ Keel + Bridge (Cursor + Cline):
 ```bash
 curl -fsSL https://raw.githubusercontent.com/raulaguila/keel/master/install.sh | bash -s -- --providers=cursor,cline
 curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor,cline
+# Impeccable: npx impeccable install
 ```
 
 Pin: `BRIDGE_REF=v0.2.1 curl -fsSL …/install.sh | bash -s -- --providers=cursor`
 
-## Clone local (opcional)
+## Local clone (optional)
 
 ```bash
 git clone https://github.com/raulaguila/bridge.git /tmp/bridge-skill
-cd /caminho/do/seu/projeto
+cd /path/to/your/project
 node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
 ```
 
-## Um comando por harness
+## One command per harness
 
-| Harness / agente | Comando |
-|------------------|---------|
-| Cursor | `node …/bridge.js install --providers=cursor` |
-| Claude Code | `node …/bridge.js install --providers=claude` |
-| Codex / Agents | `node …/bridge.js install --providers=codex` ou `agents` |
-| Gemini CLI | `node …/bridge.js install --providers=gemini` |
-| GitHub Copilot | `node …/bridge.js install --providers=copilot` |
-| OpenCode | `node …/bridge.js install --providers=opencode` |
-| Windsurf | `node …/bridge.js install --providers=windsurf` |
-| Continue | `node …/bridge.js install --providers=continue` |
-| Cline | `node …/bridge.js install --providers=cline` |
-| Grok Build | `node …/bridge.js install --providers=grok` |
-| Kiro | `node …/bridge.js install --providers=kiro` |
-| Pi | `node …/bridge.js install --providers=pi` |
-| Trae / Trae CN | `node …/bridge.js install --providers=trae` ou `trae-cn` |
-| Hermes | `node …/bridge.js install --providers=hermes` |
-| DeepSeek Harness | `node …/bridge.js install --providers=dsh` |
-| Qoder | `node …/bridge.js install --providers=qoder` |
-| Rovo Dev | `node …/bridge.js install --providers=rovo-dev` |
-| Mistral Vibe | `node …/bridge.js install --providers=vibe` |
-| Veto | `node …/bridge.js install --providers=veto` |
-| Antigravity | `node …/bridge.js install --providers=antigravity` |
-| Aider (path manual) | `node …/bridge.js install --providers=aider` |
+| Harness / agent | Command |
+|-----------------|---------|
+| Cursor | `… install --providers=cursor` |
+| Claude Code | `… install --providers=claude` |
+| Codex / Agents | `… install --providers=codex` or `agents` |
+| Gemini CLI | `… install --providers=gemini` |
+| GitHub Copilot | `… install --providers=copilot` |
+| OpenCode | `… install --providers=opencode` |
+| Windsurf | `… install --providers=windsurf` |
+| Continue | `… install --providers=continue` |
+| Cline | `… install --providers=cline` |
+| Grok Build | `… install --providers=grok` |
+| Kiro | `… install --providers=kiro` |
+| Pi | `… install --providers=pi` |
+| Trae / Trae CN | `… install --providers=trae` or `trae-cn` |
+| Hermes | `… install --providers=hermes` |
+| DeepSeek Harness | `… install --providers=dsh` |
+| Qoder | `… install --providers=qoder` |
+| Rovo Dev | `… install --providers=rovo-dev` |
+| Mistral Vibe | `… install --providers=vibe` |
+| Veto | `… install --providers=veto` |
+| Antigravity | `… install --providers=antigravity` |
+| Aider (manual path) | `… install --providers=aider` |
 
-## Vários de uma vez
+## Several at once
 
 ```bash
-node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor,claude,codex,gemini,copilot
-node /tmp/bridge-skill/cli/bin/bridge.js install --providers=all
-node /tmp/bridge-skill/cli/bin/bridge.js install --list-providers
+npx --yes github:raulaguila/bridge install --providers=cursor,claude,codex,gemini,copilot
+npx --yes github:raulaguila/bridge install --providers=all
+npx --yes github:raulaguila/bridge install --list-providers
 ```
 
-## Onde a skill é copiada
+## Where the skill is copied
 
-| Provider | Pasta | Invocar |
-|----------|-------|---------|
+| Provider | Folder | Invoke |
+|----------|--------|--------|
 | `cursor` | `.cursor/skills/bridge` | `/bridge` |
 | `claude` | `.claude/skills/bridge` | `/bridge` |
 | `codex` / `agents` | `.agents/skills/bridge` | `/bridge` |
@@ -76,17 +79,17 @@ node /tmp/bridge-skill/cli/bin/bridge.js install --list-providers
 | `cline` | `.cline/skills/bridge` (+ `.clinerules/skills/bridge`) | `/bridge` |
 | … | `--list-providers` | `/bridge` |
 
-## Fluxo após instalar
+## After install
 
-1. Instale também Keel e Impeccable nos **mesmos** providers.  
-2. Recarregue o harness.  
+1. Install Keel and Impeccable for the **same** providers.
+2. Reload the harness.
 3. `/bridge init` → `/bridge contract` → `/bridge plan`.
 
-## Atualizar
+## Update
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor,claude
-# ou: npx --yes github:raulaguila/bridge update --providers=cursor,claude
+# or: npx --yes github:raulaguila/bridge update --providers=cursor,claude
 ```
 
-`update` é alias de `install`.
+`update` is an alias of `install`.
