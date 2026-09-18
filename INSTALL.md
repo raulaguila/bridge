@@ -21,6 +21,7 @@ node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
 | OpenCode | `node …/bridge.js install --providers=opencode` |
 | Windsurf | `node …/bridge.js install --providers=windsurf` |
 | Continue | `node …/bridge.js install --providers=continue` |
+| Cline | `node …/bridge.js install --providers=cline` |
 | Grok Build | `node …/bridge.js install --providers=grok` |
 | Kiro | `node …/bridge.js install --providers=kiro` |
 | Pi | `node …/bridge.js install --providers=pi` |
@@ -51,6 +52,7 @@ node /tmp/bridge-skill/cli/bin/bridge.js install --list-providers
 | `codex` / `agents` | `.agents/skills/bridge` | `/bridge` |
 | `gemini` | `.gemini/skills/bridge` | `/bridge` |
 | `copilot` | `.github/skills/bridge` | `/bridge` |
+| `cline` | `.cline/skills/bridge` (+ `.clinerules/skills/bridge`) | `/bridge` |
 | … | `--list-providers` | `/bridge` |
 
 ## Fluxo após instalar
