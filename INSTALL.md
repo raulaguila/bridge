@@ -1,10 +1,31 @@
 # Instalar Bridge em diversos agentes / modelos
 
-Bridge orquestra **Keel** + **Impeccable**. Instale os três no mesmo projeto.
+Bridge orquestra **Keel** + **Impeccable**. Instale os três no mesmo projeto.  
+Rode **no diretório do seu projeto** — sem clonar o Bridge.
+
+## Instalação direta (recomendado)
+
+```bash
+cd /caminho/do/seu/projeto
+
+curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor
+
+npx --yes github:raulaguila/bridge install --providers=cursor
+```
+
+Keel + Bridge (Cursor + Cline):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/raulaguila/keel/master/install.sh | bash -s -- --providers=cursor,cline
+curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor,cline
+```
+
+Pin: `BRIDGE_REF=v0.2.1 curl -fsSL …/install.sh | bash -s -- --providers=cursor`
+
+## Clone local (opcional)
 
 ```bash
 git clone https://github.com/raulaguila/bridge.git /tmp/bridge-skill
-# + Keel e Impeccable (veja INSTALL.md de cada um)
 cd /caminho/do/seu/projeto
 node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
 ```
@@ -64,6 +85,8 @@ node /tmp/bridge-skill/cli/bin/bridge.js install --list-providers
 ## Atualizar
 
 ```bash
-git -C /tmp/bridge-skill pull
-node /tmp/bridge-skill/cli/bin/bridge.js update --providers=cursor,claude
+curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor,claude
+# ou: npx --yes github:raulaguila/bridge update --providers=cursor,claude
 ```
+
+`update` é alias de `install`.

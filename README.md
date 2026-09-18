@@ -5,15 +5,15 @@ Contrato, sequência e monitoramento — sem substituir o craft.
 
 ## Início rápido
 
+No diretório do **seu** projeto (sem clonar):
+
 ```bash
-git clone https://github.com/raulaguila/bridge.git /tmp/bridge-skill
-cd /caminho/do/seu/projeto
-node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
-# vários: --providers=cursor,claude,codex,gemini,copilot
-# todos:  --providers=all
+curl -fsSL https://raw.githubusercontent.com/raulaguila/bridge/master/install.sh | bash -s -- --providers=cursor
+# ou: npx --yes github:raulaguila/bridge install --providers=cursor
+# vários: --providers=cursor,claude,cline
 ```
 
-Guia completo por modelo/agente: **[INSTALL.md](INSTALL.md)**.  
+Guia completo: **[INSTALL.md](INSTALL.md)**.  
 Instale também [Keel](https://github.com/raulaguila/keel) e [Impeccable](https://github.com/pbakaus/impeccable) nos mesmos providers.
 
 `/bridge init` → `/bridge contract` → `/bridge plan` → handoff → `/bridge sync` → `/bridge ship`.

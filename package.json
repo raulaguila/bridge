@@ -9,10 +9,16 @@
   "files": [
     "cli/",
     "skill/",
+    "install.sh",
     "README.md",
     "INSTALL.md",
     "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raulaguila/bridge.git"
+  },
+
   "engines": {
     "node": ">=20"
   },
