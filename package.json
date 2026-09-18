@@ -1,0 +1,22 @@
+{
+  "name": "bridge-craft",
+  "version": "0.1.0",
+  "description": "Orchestrator skill: Keel (backend) + Impeccable (frontend) via shared CONTRACT",
+  "type": "module",
+  "bin": {
+    "bridge": "cli/bin/bridge.js"
+  },
+  "files": [
+    "cli/",
+    "skill/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "install:skill": "node cli/bin/bridge.js install --providers=cursor"
+  }
+}
