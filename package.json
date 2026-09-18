@@ -1,6 +1,6 @@
 {
   "name": "bridge-craft",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Orchestrator skill: Keel + Impeccable via CONTRACT, status/doctor/plan scripts",
   "type": "module",
   "bin": {
@@ -10,6 +10,7 @@
     "cli/",
     "skill/",
     "README.md",
+    "INSTALL.md",
     "LICENSE"
   ],
   "engines": {

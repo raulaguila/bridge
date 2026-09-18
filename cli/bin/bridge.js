@@ -1,19 +1,21 @@
 #!/usr/bin/env node
+/**
+ * bridge CLI — install + status/doctor/plan/seed
+ */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import {
+  PROVIDER_CATALOG,
+  expandProviders,
+  listProviderIds,
+} from "../lib/providers.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = path.resolve(__dirname, "../..");
 const SKILL_SRC = path.join(PKG_ROOT, "skill");
-
-const PROVIDERS = {
-  cursor: ".cursor/skills/bridge",
-  claude: ".claude/skills/bridge",
-  agents: ".agents/skills/bridge",
-  codex: ".agents/skills/bridge",
-};
+const SKILL_NAME = "bridge";
 
 function cpDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -27,24 +29,47 @@ function cpDir(src, dest) {
 
 function install(args) {
   const root = process.cwd();
-  let providers = [];
-  for (const a of args) {
-    if (a.startsWith("--providers=")) {
-      providers = a.slice(12).split(",").map((s) => s.trim()).filter(Boolean);
-    }
+  let raw = [];
+  let listOnly = false;
+  for (let i = 0; i < args.length; i++) {
+    if (args[i].startsWith("--providers=")) {
+      raw.push(...args[i].slice(12).split(",").map((s) => s.trim()).filter(Boolean));
+    } else if (args[i] === "--providers") {
+      raw.push(...String(args[++i] || "").split(",").map((s) => s.trim()).filter(Boolean));
+    } else if (args[i] === "--list-providers") listOnly = true;
+    else if (args[i] === "all") raw.push("all");
   }
-  if (!providers.length) providers = ["cursor"];
-  for (const p of providers) {
-    const dir = PROVIDERS[p];
-    if (!dir) {
-      console.error("unknown provider:", p);
-      process.exit(1);
+
+  if (listOnly) {
+    console.log("id\tlabel\tpath\tinvoke");
+    for (const id of listProviderIds()) {
+      const s = PROVIDER_CATALOG[id];
+      console.log(`${id}\t${s.label}\t${s.dir(SKILL_NAME)}\t${s.invoke(SKILL_NAME)}`);
     }
-    cpDir(SKILL_SRC, path.join(root, dir));
-    try {
-      fs.chmodSync(path.join(root, dir, "scripts", "bridge"), 0o755);
-    } catch { /* */ }
-    console.log("installed →", dir);
+    return;
+  }
+
+  if (!raw.length) raw = ["cursor"];
+  let providers;
+  try {
+    providers = expandProviders(raw);
+  } catch (e) {
+    console.error(String(e.message || e));
+    console.error("Use: bridge install --list-providers");
+    process.exit(1);
+  }
+
+  for (const id of providers) {
+    const spec = PROVIDER_CATALOG[id];
+    const dirs = [spec.dir(SKILL_NAME), ...((spec.extraDirs && spec.extraDirs(SKILL_NAME)) || [])];
+    for (const rel of dirs) {
+      const dest = path.join(root, rel);
+      cpDir(SKILL_SRC, dest);
+      try {
+        fs.chmodSync(path.join(dest, "scripts", "bridge"), 0o755);
+      } catch { /* */ }
+      console.log(`installed → ${rel} (${spec.label})`);
+    }
   }
   console.log("Reload harness → /bridge init");
   console.log("Also install Keel + Impeccable for full orchestration.");
@@ -62,12 +87,12 @@ function help() {
   console.log(`bridge — FE↔BE orchestrator (Keel + Impeccable)
 
 Usage:
-  bridge install [--providers=cursor,claude,agents]
-  bridge status  [--json]
-  bridge doctor  [--json] [--fix]
-  bridge plan    write|status|done|next …
-  bridge seed    [--in=openapi.yaml] [--force]   (openapi-seed)
+  bridge install [--providers=cursor,claude,…|all]
+  bridge install --list-providers
+  bridge status | doctor | plan | seed …
   bridge help
+
+Providers: ${listProviderIds().join(", ")}, all
 `);
 }
 

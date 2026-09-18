@@ -1,14 +1,20 @@
 # Bridge
 
-Orquestrador **FE↔BE** para [Keel](../keel) + [Impeccable](https://github.com/pbakaus/impeccable).  
+Orquestrador **FE↔BE** para [Keel](https://github.com/raulaguila/keel) + [Impeccable](https://github.com/pbakaus/impeccable).  
 Contrato, sequência e monitoramento — sem substituir o craft.
 
 ## Início rápido
 
 ```bash
-node cli/bin/bridge.js install --providers=cursor
-# + Keel e Impeccable no mesmo projeto
+git clone https://github.com/raulaguila/bridge.git /tmp/bridge-skill
+cd /caminho/do/seu/projeto
+node /tmp/bridge-skill/cli/bin/bridge.js install --providers=cursor
+# vários: --providers=cursor,claude,codex,gemini,copilot
+# todos:  --providers=all
 ```
+
+Guia completo por modelo/agente: **[INSTALL.md](INSTALL.md)**.  
+Instale também [Keel](https://github.com/raulaguila/keel) e [Impeccable](https://github.com/pbakaus/impeccable) nos mesmos providers.
 
 `/bridge init` → `/bridge contract` → `/bridge plan` → handoff → `/bridge sync` → `/bridge ship`.
 
@@ -29,7 +35,7 @@ node cli/bin/bridge.js install --providers=cursor
 
 | Comando | Flags | Descrição |
 |---------|-------|-----------|
-| `install` | `--providers=…` | Instala skill no harness |
+| `install` | `--providers=…\|all` · `--list-providers` | Instala skill no harness |
 | `status` | `--json` | Pulso |
 | `doctor` | `--json` `--fix` | Validação CONTRACT/PRODUCT |
 | `plan` | `write` · `status` · `done [n]` · `next` | Checklist em `.bridge/plan.md` |
