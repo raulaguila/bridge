@@ -76,7 +76,7 @@ npx --yes github:raulaguila/bridge install --list-providers
 | `codex` / `agents` | `.agents/skills/bridge` | `/bridge` |
 | `gemini` | `.gemini/skills/bridge` | `/bridge` |
 | `copilot` | `.github/skills/bridge` | `/bridge` |
-| `cline` | `.cline/skills/bridge` (+ `.clinerules/skills/bridge`) | `/bridge` |
+| `cline` | `.cline/skills/bridge` | `/bridge` |
 | … | `--list-providers` | `/bridge` |
 
 ## After install
